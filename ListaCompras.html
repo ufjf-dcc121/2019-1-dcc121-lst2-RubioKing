@@ -16,6 +16,24 @@
     <ul>
                 
     </ul>
+    <script>
+            document.forms.lista.addEventListener("submit", addLista);
+            document.forms.lista.addEventListener("reset", limpa);
+            function addLista(e)
+            {
+                e.preventDefault();
+                var quantidade = document.forms.lista.quant.value;
+                var item = document.forms.lista.item.value;
+                console.log(quantidade, item);
     
+                var lista = document.getElementsByTagName("ul")[0];
+                var novoli = document.createElement("li");
+                novoli.textContent = quantidade + " " + item;
+                lista.appendChild(novoli);
+
+                document.forms.lista.reset();
+            }    
+            
+        </script>
 </body>
 </html>
