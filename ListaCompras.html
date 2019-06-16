@@ -3,6 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Lista de Compras</title>
+    <style>
+        div
+        {
+            margin: 10px;
+            font-family: Verdana, Geneva, sans-serif;
+        }
+        ul
+        {
+            list-style: none;
+        }
+        #adicionar, #limpar
+        {
+            padding: 5px;
+            border-radius: 10px;
+            background-color: rgb(231, 231, 231);
+            border: 1.3px outset #2f4001;
+            font-family: Verdana, Geneva, sans-serif;
+        }
+        #adicionar:hover, #limpar:hover
+        {
+            background-color: #919191;
+            color: white;
+        }
+        #adicionar:active,#limpar:active
+        {
+            background-color: #5e5e5e;
+        }
+        input
+        {
+            border-radius: 2px;
+            border: 0.5px solid;
+            width: 130px;
+        }
+    </style>
 </head>
 <body>
     <form name="formStart" method="GET">
@@ -29,6 +63,7 @@
             e.preventDefault();
             var quantidade = document.forms.formStart.quant;
             var item = document.forms.formStart.item;
+            // Condição para Adicionar algo a lista
             if(Number(quantidade.value) > 0 && item.value.trim() != "")
             {
                 console.log(quantidade.value, item.value);
