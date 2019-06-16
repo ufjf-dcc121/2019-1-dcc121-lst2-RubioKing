@@ -5,35 +5,53 @@
     <title>Lista de Compras</title>
 </head>
 <body>
-    <form name="lista" method="GET">
-        Quantidade: <input name="quant" type="number"/>
-        <br>
-        Item: <input name="item" type="text"/>
-        <br>
-        <input value="Adicionar" type="submit"/>
-        <input value="Limpar" type="reset"/>    
+    <form name="formStart" method="GET">
+        <div>
+            <label>Quantidade: <input name="quant" type="number"/></label>
+        </div>
+        <div>
+            <label>Item: <input name="item" type="text"/></label>
+        </div>
     </form>
-    <ul>
+    <div>
+        <button id="adicionar">Adicionar</button>
+        <button id="limpar">Limpar</button>
+    </div>
+    <ul id="lista">
                 
     </ul>
     <script>
-            document.forms.lista.addEventListener("submit", addLista);
-            document.forms.lista.addEventListener("reset", limpa);
-            function addLista(e)
+        var add = document.querySelector("#adicionar");
+        var clear = document.querySelector("#limpar");
+        add.addEventListener("click", processaEnvio);
+        function processaEnvio(e)
+        {
+            e.preventDefault();
+            var quantidade = document.forms.formStart.quant;
+            var item = document.forms.formStart.item;
+            if(Number(quantidade.value) > 0 && item.value.trim() != "")
             {
-                e.preventDefault();
-                var quantidade = document.forms.lista.quant.value;
-                var item = document.forms.lista.item.value;
-                console.log(quantidade, item);
-    
-                var lista = document.getElementsByTagName("ul")[0];
-                var novoli = document.createElement("li");
-                novoli.textContent = quantidade + " " + item;
-                lista.appendChild(novoli);
+                console.log(quantidade.value, item.value);
 
-                document.forms.lista.reset();
-            }    
-            
-        </script>
+                var lista = document.getElementById("lista");
+                var novoli = document.createElement("li");
+                novoli.textContent = quantidade.value + " " + item.value;
+                lista.appendChild(novoli);
+            }
+
+            formStart.reset();
+            formStart.focus();
+        }
+        clear.addEventListener("click", limpa);
+        function limpa(e) 
+        {
+            var lista = document.getElementById("lista");
+            while (lista.childElementCount != 0)
+            {
+                lista.removeChild(lista.lastChild);
+            }
+            console.clear();
+        }
+    </script>
 </body>
 </html>
