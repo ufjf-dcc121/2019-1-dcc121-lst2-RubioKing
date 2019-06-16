@@ -5,6 +5,50 @@
     <title>Excursão</title>
 </head>
 <body>
-    
+    <form name="formEntrada" method="GET">
+        <div>
+            <label>Nome: <input placeholder="Digite seu nome" name="nome" type="text"/></label>
+        </div>
+        <div>
+            <label>Idade:  <input placeholder="Digite sua idade" name="idade" type="number"/></label>
+        </div>
+        <input value="Enviar" type="submit"/>
+    </form>
+    <div id="listas">
+        <ul id="adultos">
+            Adultos
+        </ul>
+        <ul id="estudantes">
+            Estudantes
+        </ul>
+    <div>
+    <script>
+        var enviar = document.forms.formEntrada;
+        enviar.addEventListener("submit", envia);
+        function envia(e)
+        {
+            e.preventDefault();
+            var nome = document.forms.formEntrada.nome.value;
+            var idade = document.forms.formEntrada.idade.value;
+            if(nome.trim() != "" && Number(idade)>0)
+            {    
+                if(Number(idade)>=18)
+                {
+                    var novoli = document.createElement("li");
+                    novoli.textContent = nome + " - " + idade;
+                    var adultos = document.getElementById("adultos");
+                    adultos.appendChild(novoli);
+                }
+                else
+                {
+                    var novoli = document.createElement("li");
+                    novoli.textContent = nome + " - " + idade;
+                    var estudantes = document.getElementById("estudantes");
+                    estudantes.appendChild(novoli);
+                }
+            }
+            formEntrada.reset();
+        }
+    </script>
 </body>
 </html>
