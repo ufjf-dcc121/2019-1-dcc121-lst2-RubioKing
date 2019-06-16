@@ -22,12 +22,27 @@
         {
             var conteudo = document.forms.formEntrada.conteudo.value;
             var lista = document.getElementById("lista");
-            var novoli = document.createElement("li");
-            novoli.textContent = conteudo;
-            lista.appendChild(novoli);
-            formEntrada.reset();
+            if (conteudo.trim() != "")
+            { 
+                var novoli = document.createElement("li");
+                novoli.textContent = conteudo;
+                lista.appendChild(novoli);
+                formEntrada.reset();
+            }
         }
-
+        bDesempilha.addEventListener("click", desempilha)
+        function desempilha()
+        {
+            var lista = document.getElementById("lista");
+            if(lista.childElementCount > 0)
+            {
+                lista.removeChild(lista.lastChild);
+            }
+            else
+            {
+                console.log("Lista Vazia!");
+            }
+        }
     </script>
 </body>
 </html>
