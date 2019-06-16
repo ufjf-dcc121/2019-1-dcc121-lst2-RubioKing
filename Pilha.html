@@ -5,6 +5,29 @@
     <title>Pilha</title>
 </head>
 <body>
-    
+    <h2>Pilha de Dados</h2>
+    <form name="formEntrada" method="GET">
+        <input name="conteudo" type="text"/>
+    </form>
+    <button id="empilha">Empilhar</button>
+    <button id="desempilha">Desempilhar</button>
+    <ol id="lista">
+
+    </ol>
+    <script>
+        var bEmpilha = document.getElementById("empilha");
+        var bDesempilha = document.getElementById("desempilha");
+        bEmpilha.addEventListener("click", empilha);
+        function empilha()
+        {
+            var conteudo = document.forms.formEntrada.conteudo.value;
+            var lista = document.getElementById("lista");
+            var novoli = document.createElement("li");
+            novoli.textContent = conteudo;
+            lista.appendChild(novoli);
+            formEntrada.reset();
+        }
+
+    </script>
 </body>
 </html>
