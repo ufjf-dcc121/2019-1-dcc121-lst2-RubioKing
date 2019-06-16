@@ -3,23 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <title>Pilha</title>
+    <style>
+        body
+        {
+            font-family: Verdana, Geneva, sans-serif;
+        }
+        h2 
+        {
+            text-align: center;
+        }
+        form
+        {
+            text-align: center;
+        }
+        div
+        {
+           text-align: center;
+           margin: 10px; 
+        }
+        #empilha, #desempilha
+        {
+            padding: 5px;
+            border-radius: 10px;
+            background-color: rgb(231, 231, 231);
+            border: 1.3px outset #2f4001;
+        }
+        #empilha:hover, #desempilha:hover
+        {
+            background-color: #919191;
+            color: white;
+        }
+        #empilha:active,#desempilha:active
+        {
+            background-color: #5e5e5e;
+        }
+        li
+        {
+            border: 1px solid;
+            width: 10pc;
+        }
+        ol
+        {
+            position: relative;
+            left: 37%;
+            list-style: none;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <h2>Pilha de Dados</h2>
     <form name="formEntrada" method="GET">
-        <input name="conteudo" type="text"/>
+        <input placeholder="Digite Aqui" name="conteudo" type="text"/>
     </form>
-    <button id="empilha">Empilhar</button>
-    <button id="desempilha">Desempilhar</button>
+    <div>
+        <button id="empilha">Empilhar</button>
+        <button id="desempilha">Desempilhar</button>
+    </div>
     <ol id="lista">
-
+        <!--A Lista está ordenada, porém, estilizei para ter a ilustração de uma pilha de dados-->
     </ol>
     <script>
         var bEmpilha = document.getElementById("empilha");
         var bDesempilha = document.getElementById("desempilha");
         bEmpilha.addEventListener("click", empilha);
-        function empilha()
+        function empilha(e)
         {
+            e.preventDefault();
             var conteudo = document.forms.formEntrada.conteudo.value;
             var lista = document.getElementById("lista");
             if (conteudo.trim() != "")
