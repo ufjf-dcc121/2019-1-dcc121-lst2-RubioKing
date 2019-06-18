@@ -3,25 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <title>Excursão</title>
+    <style>
+            body
+            {
+                font-family: Verdana, Geneva, sans-serif;
+                font-size: 12.5px;
+            }
+            form
+            {
+                border: 1px solid;
+                padding: 5px 0px 5px 5px;
+                width: 230px;
+                height: 75px;
+            }
+            #listas
+            {
+                border: 1px solid;
+                margin-top: 10px;
+                width: 235px;
+                height: auto;
+            }
+            #nome, #idade
+            {
+                padding: 3px;
+                width: 230px;
+                float: left;
+            }
+            #enviar
+            {
+                position: relative;
+                float: right;
+                margin: 1px 6px 0px 0px;
+                padding: 0px 20px 0px 20px
+            }
+            #enviar:hover
+            {
+                background-color: #969696;
+                color: rgb(255, 255, 255)
+            }
+            #enviar:active
+            {
+                background-color: #464545;
+                color: rgb(255, 255, 255)
+            }
+            input
+            {
+                border: 2px outset #8f8f8f;
+            }
+            input[placeholder]
+            {
+                text-align: center
+            }
+            
+        </style>
 </head>
 <body>
     <form name="formEntrada" method="GET">
-        <div>
-            <label>Nome: <input placeholder="Digite seu nome" name="nome" type="text"/></label>
+        <div id="nome">
+            <label>Nome: <input placeholder="Digite o nome aqui" name="nome" type="text"/></label>
         </div>
-        <div>
-            <label>Idade:  <input placeholder="Digite sua idade" name="idade" type="number"/></label>
+        <div id="idade">
+            <label>Idade: <input placeholder="Digite a idade aqui" name="idade" type="number"/></label>
         </div>
-        <input value="Enviar" type="submit"/>
+        <input id="enviar" value="Enviar" type="submit"/>
     </form>
     <div id="listas">
         <ul id="adultos">
-            Adultos
+            <b>Adultos</b>
         </ul>
         <ul id="estudantes">
-            Estudantes
+            <b>Estudantes</b>
         </ul>
-    <div>
+    </div>
     <script>
         var enviar = document.forms.formEntrada;
         enviar.addEventListener("submit", envia);
