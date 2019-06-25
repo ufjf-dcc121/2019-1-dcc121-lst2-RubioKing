@@ -66,6 +66,8 @@
             <label>Idade: <input placeholder="Digite a idade aqui" name="idade" type="number"/></label>
         </div>
         <input id="enviar" value="Enviar" type="submit"/>
+        <button style="display: none" id="excluir">Excluir</button>
+        <button style="display: none" id="editar">Editar</button>
     </form>
     <div id="listas">
         <ul id="adultos">
@@ -88,6 +90,7 @@
                 if(Number(idade)>=18)
                 {
                     var novoli = document.createElement("li");
+                    novoli.addEventListener("click", show);
                     novoli.textContent = nome + " - " + idade;
                     var adultos = document.getElementById("adultos");
                     adultos.appendChild(novoli);
@@ -102,6 +105,16 @@
             }
             formEntrada.reset();
         }
+        var excluir = document.getElementById("excluir");
+        var editar = document.getElementById("editar");        
+        function show (e) 
+        {
+            e.preventDefault();
+            excluir.style.display = "initial";
+            editar.style.display = "initial"
+        }
+        
+
     </script>
 </body>
 </html>
