@@ -54,7 +54,10 @@
             {
                 text-align: center
             }
-            
+            #selec
+            {
+                color: red;
+            }
         </style>
 </head>
 <body>
@@ -67,7 +70,6 @@
         </div>
         <input id="enviar" value="Enviar" type="submit"/>
         <button style="display: none" id="excluir">Excluir</button>
-        <button style="display: none" id="editar">Editar</button>
     </form>
     <div id="listas">
         <ul id="adultos">
@@ -79,41 +81,96 @@
     </div>
     <script>
         var enviar = document.forms.formEntrada;
+        var adultos = document.getElementById("adultos");
+        var estudantes = document.getElementById("estudantes");
+        var excluir = document.getElementById("excluir");
+        var editar = document.getElementById("editar");
+        var UL;
+        var taEditando = false;
+
         enviar.addEventListener("submit", envia);
+        excluir.addEventListener("click", del)
+
+        
+
         function envia(e)
         {
             e.preventDefault();
             var nome = document.forms.formEntrada.nome.value;
             var idade = document.forms.formEntrada.idade.value;
-            if(nome.trim() != "" && Number(idade)>0)
-            {    
-                if(Number(idade)>=18)
-                {
-                    var novoli = document.createElement("li");
-                    novoli.addEventListener("click", show);
-                    novoli.textContent = nome + " - " + idade;
-                    var adultos = document.getElementById("adultos");
-                    adultos.appendChild(novoli);
-                }
-                else
-                {
-                    var novoli = document.createElement("li");
-                    novoli.textContent = nome + " - " + idade;
-                    var estudantes = document.getElementById("estudantes");
-                    estudantes.appendChild(novoli);
+
+            if (taEditando == false)
+            {
+                if(nome.trim() != "" && Number(idade)>0)
+                {    
+                    if(Number(idade)>=18)
+                    {
+                        var novoli = document.createElement("li");
+                        novoli.addEventListener("click", alterar);
+                        novoli.innerHTML = "<span id='refNome'>" + nome + "</span>" + " - " + "<span id='refIdade'>"+ idade + "</span>";4
+                        adultos.appendChild(novoli);
+                    }
+                    else
+                    {
+                        var novoli = document.createElement("li");
+                        novoli.addEventListener("click", alterar);
+                        novoli.innerHTML = "<span id='refNome'>"+ nome + "</span>" + " - " + "<span id='refIdade'>"+ idade + "</span>";
+                        estudantes.appendChild(novoli);
+                    }
                 }
             }
             formEntrada.reset();
+            formEntrada.nome.focus();
+
+            var lis = document.getElementsByTagName("li");
+            for ( var i = 0; i < lis.length; i++)
+            {
+                if(lis[i].style.color == "red")
+                {
+                    var refNome = formEntrada.nome.value;
+                    var refIdade = formEntrada.idade.value;
+                    lis[i].innerHTML = "<span id='refNome'>"+ nome + "</span>" + " - " + "<span id='refIdade'>"+ idade + "</span>";
+
+                    lis[i].style.color = "black";
+                    taEditando = false;
+                    excluir.style.display = "none";
+                    formEntrada.enviar.value = "Enviar";
+                }
+            }
         }
-        var excluir = document.getElementById("excluir");
-        var editar = document.getElementById("editar");        
-        function show (e) 
+              
+        function alterar () 
         {
-            e.preventDefault();
-            excluir.style.display = "initial";
-            editar.style.display = "initial"
+            if (taEditando == false)
+            {
+                this.style.color="red";
+                excluir.style.display = "inline";
+                taEditando = true;
+            }
+            else 
+            {
+                UL = this.parentElement;
+                document.getElementById("enviar").value = "Alterar";
+            }
         }
         
+        function del()
+        {
+            var lis = document.getElementsByTagName("li");
+            var tam = lis.length;
+            for(var i = 0; i < tam; i++)
+            {
+                if (lis[i].style.color=="red")
+                {
+                    UL.removeChild(lis[i]);
+                }
+            }
+            taEditando = false;
+            excluir.style.display = "none";
+            formEntrada.enviar.value = "Enviar";
+            formEntrada.reset();
+            formEntrada.nome.focus();
+        }
 
     </script>
 </body>
