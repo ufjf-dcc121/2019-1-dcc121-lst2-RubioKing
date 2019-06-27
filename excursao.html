@@ -141,17 +141,12 @@
               
         function alterar () 
         {
-            if (taEditando == false)
-            {
-                this.style.color="red";
-                excluir.style.display = "inline";
-                taEditando = true;
-            }
-            else 
-            {
-                UL = this.parentElement;
-                document.getElementById("enviar").value = "Alterar";
-            }
+            this.style.color="red";
+            excluir.style.display = "inline";
+            taEditando = true;
+
+            UL = this.parentElement;
+            document.getElementById("enviar").value = "Alterar";
         }
         
         function del()
