@@ -28,34 +28,83 @@
     <br>
     <table id="tabela">
         <tr>
+            <th></th>
             <th>Animal</th>
             <th>Altura</th>
             <th>Peso</th>
             <th>Velocidade</th>
-            <th>Idade Máxima</th>
+            <th>Idade Máx</th>
         </tr>
         <tfoot>
             <tr>
+                <th>Medias </th>
                 <td></td>
+                <td id="alturat"></td>
+                <td id="pesot"></td>
+                <td id="velocidadet"></td>
+                <td id="idademaxt"></td>
             </tr>
         </tfoot>
     </table>
     <script>
+        //Refs do Formulario
         var animal = document.forms.formEntrada.animal;
         var altura = document.forms.formEntrada.altura;
         var peso = document.forms.formEntrada.peso;
         var velocidade = document.forms.formEntrada.velocidade;
         var idademax = document.forms.formEntrada.idademax;
+        
+        //Refs da Tabela
         var table = document.getElementById("tabela");
+        var contAnimais = 0;
+        var alturat = document.getElementById("alturat");
+        var pesot = document.getElementById("pesot");
+        var velocidadet = document.getElementById("velocidadet");
+        var idademaxt = document.getElementById("idademaxt");
         
         var enviar = document.forms.formEntrada;
         enviar.addEventListener("submit", envia);
+        enviar.addEventListener("submit", media);
         function envia (e)
         {
             e.preventDefault();
             var novotr = document.createElement("tr");
-            novotr.innerHTML = "<td>" + animal.value + "</td>" + "<td>" + altura.value + "</td>" + "<td>" + peso.value + "</td>" + "<td>" + velocidade.value + "</td>" + "<td>" + idademax.value + "</td>";
+            novotr.innerHTML = "<td></td>" + "<td class='animal'>" + animal.value + "</td>" + "<td class='altura'>" + altura.value + "</td>" + "<td class='peso'>" + peso.value + "</td>" + "<td class='velocidade'>" + velocidade.value + "</td>" + "<td class='idademax'>" + idademax.value + "</td>";
             table.appendChild(novotr);
+            contAnimais++;
+            formEntrada.reset();
+        }
+        function media ()
+        {
+            //Referências
+            var alturas = document.getElementsByClassName("altura");
+            var pesos = document.getElementsByClassName("peso");
+            var velocidades = document.getElementsByClassName("velocidade");
+            var idades = document.getElementsByClassName("idademax");
+
+            // Variáveis pra separar a soma dos valores
+            var somaAL = 0;
+            var somaPS = 0;
+            var somaVEL = 0;
+            var somaIDM = 0;
+            
+            for (var i = 0; i < contAnimais; i++)
+            {
+                somaAL = somaAL + Number(alturas[i].textContent);
+                somaPS = somaPS + Number(pesos[i].textContent);
+                somaVEL = somaVEL + Number(velocidades[i].textContent);
+                somaIDM = somaIDM + Number(idades[i].textContent);
+            }
+            somaAL = somaAL / contAnimais;
+            somaPS = somaPS / contAnimais;
+            somaVEL = somaVEL / contAnimais;
+            somaIDM = somaIDM / contAnimais;
+            
+            // Passa os números somente com 2 casas decimais
+            alturat.textContent = somaAL.toFixed(2);
+            pesot.textContent = somaPS.toFixed(2);
+            velocidadet.textContent = somaVEL.toFixed(2);
+            idademaxt.textContent = somaIDM.toFixed(2);
         }
     </script>
 </body>
