@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <title>Coleção de Animais</title>
@@ -46,6 +46,13 @@
             </tr>
         </tfoot>
     </table>
+    <ul>
+        <li id="alto"></li>
+        <li id="pesado"></li>
+        <li id="veloz"></li>
+        <li id="longevo"></li>
+    </ul>
+    <p>Estão acima da media de peso <span id="acimaMedia"></span> animais</p>
     <script>
         //Refs do Formulario
         var animal = document.forms.formEntrada.animal;
@@ -61,10 +68,22 @@
         var pesot = document.getElementById("pesot");
         var velocidadet = document.getElementById("velocidadet");
         var idademaxt = document.getElementById("idademaxt");
+        var animais = document.getElementsByClassName("animal");
+        var alturas = document.getElementsByClassName("altura");
+        var pesos = document.getElementsByClassName("peso");
+        var velocidades = document.getElementsByClassName("velocidade");
+        var idades = document.getElementsByClassName("idademax");
+
+        //Outras refs
+        var alto = document.getElementById("alto");
+        var pesado = document.getElementById("pesado");
+        var veloz = document.getElementById("veloz");
+        var longevo = document.getElementById("longevo");
+        var acimaMedia = document.getElementById("acimaMedia");
+        var acima = 0;
         
         var enviar = document.forms.formEntrada;
         enviar.addEventListener("submit", envia);
-        enviar.addEventListener("submit", media);
         function envia (e)
         {
             e.preventDefault();
@@ -73,15 +92,11 @@
             table.appendChild(novotr);
             contAnimais++;
             formEntrada.reset();
+            media();
+            ranking();
         }
         function media ()
-        {
-            //Referências
-            var alturas = document.getElementsByClassName("altura");
-            var pesos = document.getElementsByClassName("peso");
-            var velocidades = document.getElementsByClassName("velocidade");
-            var idades = document.getElementsByClassName("idademax");
-
+        { 
             // Variáveis pra separar a soma dos valores
             var somaAL = 0;
             var somaPS = 0;
@@ -105,6 +120,41 @@
             pesot.textContent = somaPS.toFixed(2);
             velocidadet.textContent = somaVEL.toFixed(2);
             idademaxt.textContent = somaIDM.toFixed(2);
+        }
+        function ranking()
+        {
+            var MAlto = 0;
+            var MPesado = 0;
+            var MVeloz = 0;
+            var MLongevo = 0;
+            
+            for(var i = 0; i < contAnimais; i++)
+            {
+                if (Number(alturas[i].textContent) > MAlto)
+                {
+                    MAlto = Number(alturas[i].textContent);
+                    alto.textContent = animais[i].textContent;
+                }
+                if (Number(pesos[i].textContent) > MPesado)
+                {
+                    MPesado = Number(pesos[i].textContent);
+                    pesado.textContent = animais[i].textContent;
+                }
+                if (Number(velocidades[i].textContent) > MVeloz)
+                {
+                    MVeloz = Number(velocidades[i].textContent);
+                    veloz.textContent = animais[i].textContent;
+                }
+                if (Number(idades[i].textContent) > MLongevo)
+                {
+                    MLongevo = Number(idades[i].textContent);
+                    longevo.textContent = animais[i].textContent;
+                }
+                if (Number(pesos[i].textContent) > Number(pesot.textContent))
+                {
+
+                }
+            }
         }
     </script>
 </body>
